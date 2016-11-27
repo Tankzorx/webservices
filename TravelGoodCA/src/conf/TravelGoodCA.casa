@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<casa xmlns="http://java.sun.com/xml/ns/casa" xmlns:ns1="http://MMMNGG.dtu.com/" xmlns:ns2="http://NiceView.com/" xmlns:ns3="TravelGoodCA" xmlns:ns4="http://j2ee.netbeans.org/wsdl/TravelGoodBPEL/src/TravelGoodClient" xmlns:ns5="http://enterprise.netbeans.org/bpel/TravelGoodBPEL/travelGoodBPEL" xmlns:xlink="http://www.w3.org/2000/xlink">
+    <endpoints>
+        <endpoint endpoint-name="LameDuckWebServicePort" interface-name="ns1:LameDuckWebService" name="endpoint1" service-name="ns1:MainWebService"/>
+        <endpoint endpoint-name="NiceViewPort" interface-name="ns2:NiceView" name="endpoint2" service-name="ns2:NiceViewService"/>
+        <endpoint endpoint-name="casaPort1" interface-name="ns4:TravelGoodClientPortType" name="endpoint3" service-name="ns3:TravelGoodCAService1"/>
+        <endpoint display-name="client" endpoint-name="TravelGoodClientPortTypeRole_myRole" file-path="travelGoodBPEL.bpel" interface-name="ns4:TravelGoodClientPortType" name="endpoint4" process-name="travelGoodBPEL" service-name="ns5:client"/>
+        <endpoint display-name="NiceView" endpoint-name="NiceViewRole_partnerRole" file-path="travelGoodBPEL.bpel" interface-name="ns2:NiceView" name="endpoint5" process-name="travelGoodBPEL" service-name="ns5:NiceView"/>
+        <endpoint display-name="LameDuck" endpoint-name="LameDuckWebServiceRole_partnerRole" file-path="travelGoodBPEL.bpel" interface-name="ns1:LameDuckWebService" name="endpoint6" process-name="travelGoodBPEL" service-name="ns5:LameDuck"/>
+    </endpoints>
+    <service-units>
+        <service-engine-service-unit artifacts-zip="TravelGoodBPEL.jar" component-name="sun-bpel-engine" defined="true" description="Represents this Service Unit" internal="true" name="TravelGoodCA-TravelGoodBPEL" unit-name="TravelGoodBPEL" unknown="false" x="144" y="99">
+            <provides endpoint="endpoint4"/>
+            <consumes endpoint="endpoint5"/>
+            <consumes endpoint="endpoint6"/>
+        </service-engine-service-unit>
+        <binding-component-service-unit artifacts-zip="sun-http-binding.jar" component-name="sun-http-binding" description="Represents this Service Unit" name="TravelGoodCA-sun-http-binding" unit-name="sun-http-binding">
+            <ports>
+                <port bindingType="soap" x="67" y="306">
+                    <link xlink:href="../jbiasa/TravelGoodCA.wsdl#xpointer(/definitions/service[@name='TravelGoodCAService1']/port[@name='casaPort1'])" xlink:type="simple"/>
+                    <consumes endpoint="endpoint3"/>
+                    <provides endpoint="endpoint3"/>
+                </port>
+                <port x="67" y="118">
+                    <link xlink:href="../jbiServiceUnits/META-INF/TravelGoodBPEL/src/_references/_relative/nbproject/private/retriever/localhost_8080/LameDuck/MainWebService.wsdl#xpointer(/definitions/service[@name='MainWebService']/port[@name='LameDuckWebServicePort'])" xlink:type="simple"/>
+                    <consumes endpoint="endpoint1"/>
+                    <provides endpoint="endpoint1"/>
+                </port>
+                <port x="67" y="39">
+                    <link xlink:href="../jbiServiceUnits/META-INF/TravelGoodBPEL/src/_references/_relative/nbproject/private/retriever/localhost_8080/NiceView/NiceViewService.wsdl#xpointer(/definitions/service[@name='NiceViewService']/port[@name='NiceViewPort'])" xlink:type="simple"/>
+                    <consumes endpoint="endpoint2"/>
+                    <provides endpoint="endpoint2"/>
+                </port>
+            </ports>
+        </binding-component-service-unit>
+    </service-units>
+    <connections>
+        <connection consumer="endpoint6" provider="endpoint1" state="unchanged"/>
+        <connection consumer="endpoint5" provider="endpoint2" state="unchanged"/>
+        <connection consumer="endpoint3" provider="endpoint4" state="new"/>
+    </connections>
+    <porttypes>
+        <link xlink:href="../jbiasa/TravelGoodCA.wsdl#xpointer(/definitions/portType[@name='dummyCasaPortType'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/META-INF/TravelGoodBPEL/src/_references/_relative/nbproject/private/retriever/localhost_8080/LameDuck/MainWebService.wsdl#xpointer(/definitions/portType[@name='LameDuckWebService'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/META-INF/TravelGoodBPEL/src/_references/_relative/nbproject/private/retriever/localhost_8080/NiceView/NiceViewService.wsdl#xpointer(/definitions/portType[@name='NiceView'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/TravelGoodBPEL/TravelGoodClient.wsdl#xpointer(/definitions/portType[@name='TravelGoodClientPortType'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/TravelGoodCA.wsdl#xpointer(/definitions/portType[@name='dummyCasaPortType'])" xlink:type="simple"/>
+    </porttypes>
+    <bindings>
+        <link xlink:href="../jbiasa/TravelGoodCA.wsdl#xpointer(/definitions/binding[@name='casaBinding1'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/META-INF/TravelGoodBPEL/src/_references/_relative/nbproject/private/retriever/localhost_8080/LameDuck/MainWebService.wsdl#xpointer(/definitions/binding[@name='LameDuckWebServicePortBinding'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/META-INF/TravelGoodBPEL/src/_references/_relative/nbproject/private/retriever/localhost_8080/NiceView/NiceViewService.wsdl#xpointer(/definitions/binding[@name='NiceViewPortBinding'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/TravelGoodCA.wsdl#xpointer(/definitions/binding[@name='casaBinding1'])" xlink:type="simple"/>
+    </bindings>
+    <services>
+        <link xlink:href="../jbiasa/TravelGoodCA.wsdl#xpointer(/definitions/service[@name='TravelGoodCAService1'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/META-INF/TravelGoodBPEL/src/_references/_relative/nbproject/private/retriever/localhost_8080/LameDuck/MainWebService.wsdl#xpointer(/definitions/service[@name='MainWebService'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/META-INF/TravelGoodBPEL/src/_references/_relative/nbproject/private/retriever/localhost_8080/NiceView/NiceViewService.wsdl#xpointer(/definitions/service[@name='NiceViewService'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/TravelGoodCA.wsdl#xpointer(/definitions/service[@name='TravelGoodCAService1'])" xlink:type="simple"/>
+    </services>
+    <regions>
+        <region name="WSDL Endpoints" width="150"/>
+        <region name="JBI Modules" width="500"/>
+        <region name="External Modules" width="200"/>
+    </regions>
+</casa>

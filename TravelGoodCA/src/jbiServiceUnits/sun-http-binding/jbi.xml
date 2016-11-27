@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jbi xmlns="http://java.sun.com/xml/ns/jbi" xmlns:ns1="http://enterprise.netbeans.org/bpel/TravelGoodBPEL/travelGoodBPEL" xmlns:ns2="http://MMMNGG.dtu.com/" xmlns:ns3="http://NiceView.com/" xmlns:ns4="TravelGoodCA" xmlns:ns5="http://j2ee.netbeans.org/wsdl/TravelGoodBPEL/src/TravelGoodClient" version="1.0">
+    <services binding-component="true">
+        <provides endpoint-name="LameDuckWebServicePort" interface-name="ns2:LameDuckWebService" service-name="ns2:MainWebService"/>
+        <provides endpoint-name="NiceViewPort" interface-name="ns3:NiceView" service-name="ns3:NiceViewService"/>
+        <consumes endpoint-name="casaPort1" interface-name="ns5:TravelGoodClientPortType" service-name="ns4:TravelGoodCAService1"/>
+    </services>
+</jbi>

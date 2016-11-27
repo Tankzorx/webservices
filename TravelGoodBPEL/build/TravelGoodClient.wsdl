@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="TravelGoodClient" targetNamespace="http://j2ee.netbeans.org/wsdl/TravelGoodBPEL/src/TravelGoodClient"
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://j2ee.netbeans.org/wsdl/TravelGoodBPEL/src/TravelGoodClient" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:ns="http://MMMNGG.dtu.com/" xmlns:ns0="http://NiceView.com/" xmlns:ns1="http://types.fastmoney.imm.dtu.dk">
+    <types>
+        <xsd:schema targetNamespace="http://j2ee.netbeans.org/wsdl/TravelGoodBPEL/src/TravelGoodClient" xmlns:tns="http://j2ee.netbeans.org/wsdl/TravelGoodBPEL/src/TravelGoodClient">
+            <xsd:import namespace="http://MMMNGG.dtu.com/" schemaLocation="LameDuckData.xsd"/>
+            <xsd:import namespace="http://NiceView.com/" schemaLocation="NiceViewData.xsd"/>
+            <xsd:import namespace="http://types.fastmoney.imm.dtu.dk" schemaLocation="LDFastMoneyData.xsd"/>
+            <xsd:complexType name="flightList">
+                <xsd:sequence>
+                    <xsd:element name="flightInfo" maxOccurs="unbounded">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="price" type="xsd:integer"></xsd:element>
+                                <xsd:element name="departure" type="xsd:dateTime"></xsd:element>
+                                <xsd:element name="bookingNumber" type="xsd:string"></xsd:element>
+                                <xsd:element name="isBooked" type="xsd:boolean"></xsd:element>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="hotelList">
+                <xsd:sequence>
+                    <xsd:element name="hotelInfo" maxOccurs="unbounded">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="price" type="xsd:integer"></xsd:element>
+                                <xsd:element name="bookingNumber" type="xsd:integer"></xsd:element>
+                                <xsd:element name="isBooked" type="xsd:boolean"></xsd:element>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="boolean" type="xsd:boolean"></xsd:element>
+            <xsd:element name="newElement" type="xsd:string"></xsd:element>
+        </xsd:schema>
+    </types>
+    <message name="createItineraryRequest">
+        <part name="name" type="xsd:string"/>
+    </message>
+    <message name="createItineraryResponse">
+        <part name="uid" type="xsd:string"/>
+    </message>
+    <message name="cancelRequest">
+        <part name="uid" type="xsd:string"/>
+    </message>
+    <message name="cancelResponse">
+        <part name="ok" type="xsd:boolean"/>
+    </message>
+    <message name="getFlightsRequest">
+        <part name="uid" type="xsd:string"/>
+        <part name="from" type="xsd:string"/>
+        <part name="to" type="xsd:string"/>
+        <part name="departureDate" type="xsd:dateTime"/>
+    </message>
+    <message name="getFlightsResponse">
+        <part name="flightList" type="ns:getFlightsResponse"/>
+    </message>
+    <message name="getHotelsRequest">
+        <part name="uid" type="xsd:string"/>
+        <part name="arrivalDate" type="xsd:dateTime"/>
+        <part name="departureDate" type="xsd:dateTime"/>
+        <part name="city" type="xsd:string"/>
+    </message>
+    <message name="getHotelsResponse">
+        <part name="hotelList" type="ns0:getHotelsResponse"/>
+    </message>
+    <message name="addFlightRequest">
+        <part name="uid" type="xsd:string"/>
+        <part name="bookingNumber" type="xsd:string"/>
+        <part name="departure" type="xsd:dateTime"/>
+        <part name="price" type="xsd:integer"/>
+    </message>
+    <message name="addFlightResponse">
+        <part name="ok" type="xsd:boolean"/>
+    </message>
+    <message name="getItineraryRequest">
+        <part name="uid" type="xsd:string"/>
+    </message>
+    <message name="getItineraryResponse">
+        <part name="flights" type="tns:flightList"/>
+        <part name="hotels" type="tns:hotelList"/>
+    </message>
+    <message name="addHotelRequest">
+        <part name="uid" type="xsd:string"/>
+        <part name="bookingNumber" type="xsd:integer"/>
+        <part name="price" type="xsd:integer"/>
+    </message>
+    <message name="addHotelResponse">
+        <part name="ok" type="xsd:boolean"/>
+    </message>
+    <message name="bookItineraryRequest">
+        <part name="uid" type="xsd:string"/>
+        <part name="ccInfo" type="ns1:creditCardInfoType"/>
+    </message>
+    <message name="bookItineraryResponse">
+        <part name="ok" type="xsd:boolean"/>
+    </message>
+    <message name="getItineraryPostPlanningRequest">
+        <part name="uid" type="xsd:string"/>
+    </message>
+    <message name="getItineraryPostPlanningResponse">
+        <part name="flights" type="tns:flightList"/>
+        <part name="hotels" type="tns:hotelList"/>
+    </message>
+    <message name="cancelItineraryPostPlanningRequest">
+        <part name="uid" type="xsd:string"/>
+        <part name="ccInfo" type="ns1:creditCardInfoType"/>
+    </message>
+    <message name="cancelItineraryPostPlanningResponse">
+        <part name="ok" type="xsd:boolean"/>
+    </message>
+    <message name="fault">
+        <part name="msg" element="tns:newElement"/>
+    </message>
+    <portType name="TravelGoodClientPortType">
+        <operation name="createItinerary">
+            <input name="input1" message="tns:createItineraryRequest"/>
+            <output name="output1" message="tns:createItineraryResponse"/>
+        </operation>
+        <operation name="cancelItinerary">
+            <input name="input2" message="tns:cancelRequest"/>
+            <output name="output2" message="tns:cancelResponse"/>
+        </operation>
+        <operation name="getFlights">
+            <input name="input3" message="tns:getFlightsRequest"/>
+            <output name="output3" message="tns:getFlightsResponse"/>
+        </operation>
+        <operation name="getHotels">
+            <input name="input4" message="tns:getHotelsRequest"/>
+            <output name="output4" message="tns:getHotelsResponse"/>
+        </operation>
+        <operation name="addFlight">
+            <input name="input5" message="tns:addFlightRequest"/>
+            <output name="output5" message="tns:addFlightResponse"/>
+        </operation>
+        <operation name="getItinerary">
+            <input name="input6" message="tns:getItineraryRequest"/>
+            <output name="output6" message="tns:getItineraryResponse"/>
+        </operation>
+        <operation name="addHotel">
+            <input name="input7" message="tns:addHotelRequest"/>
+            <output name="output7" message="tns:addHotelResponse"/>
+        </operation>
+        <operation name="bookItinerary">
+            <input name="input8" message="tns:bookItineraryRequest"/>
+            <output name="output8" message="tns:bookItineraryResponse"/>
+            <fault name="fault1" message="tns:fault"/>
+        </operation>
+        <operation name="getItineraryPostPlanning">
+            <input name="input9" message="tns:getItineraryPostPlanningRequest"/>
+            <output name="output9" message="tns:getItineraryPostPlanningResponse"/>
+        </operation>
+        <operation name="cancelItineraryPostPlanning">
+            <input name="input10" message="tns:cancelItineraryPostPlanningRequest"/>
+            <output name="output10" message="tns:cancelItineraryPostPlanningResponse"/>
+        </operation>
+    </portType>
+    <plnk:partnerLinkType name="TravelGoodClient">
+        <!-- A partner link type is automatically generated when a new port type is added. Partner link types are used by BPEL processes. 
+In a BPEL process, a partner link represents the interaction between the BPEL process and a partner service. Each partner link is associated with a partner link type.
+A partner link type characterizes the conversational relationship between two services. The partner link type can have one or two roles.-->
+        <plnk:role name="TravelGoodClientPortTypeRole" portType="tns:TravelGoodClientPortType"/>
+    </plnk:partnerLinkType>
+</definitions>

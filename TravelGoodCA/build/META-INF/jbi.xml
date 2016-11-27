@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jbi xmlns="http://java.sun.com/xml/ns/jbi" xmlns:ns1="http://enterprise.netbeans.org/bpel/TravelGoodBPEL/travelGoodBPEL" xmlns:ns2="http://MMMNGG.dtu.com/" xmlns:ns3="http://NiceView.com/" xmlns:ns4="TravelGoodCA" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/jbi ./jbi.xsd">
+    <service-assembly>
+        <identification>
+            <name>TravelGoodCA</name>
+            <description>Represents the Service Assembly of TravelGoodCA</description>
+        </identification>
+        <service-unit>
+            <identification>
+                <name>TravelGoodCA-TravelGoodBPEL</name>
+                <description>Represents this Service Unit</description>
+            </identification>
+            <target>
+                <artifacts-zip>TravelGoodBPEL.jar</artifacts-zip>
+                <component-name>sun-bpel-engine</component-name>
+            </target>
+        </service-unit>
+        <service-unit>
+            <identification>
+                <name>TravelGoodCA-sun-http-binding</name>
+                <description>Represents this Service Unit</description>
+            </identification>
+            <target>
+                <artifacts-zip>sun-http-binding.jar</artifacts-zip>
+                <component-name>sun-http-binding</component-name>
+            </target>
+        </service-unit>
+        <connections>
+            <connection>
+                <consumer endpoint-name="LameDuckWebServiceRole_partnerRole" service-name="ns1:LameDuck"/>
+                <provider endpoint-name="LameDuckWebServicePort" service-name="ns2:MainWebService"/>
+            </connection>
+            <connection>
+                <consumer endpoint-name="NiceViewRole_partnerRole" service-name="ns1:NiceView"/>
+                <provider endpoint-name="NiceViewPort" service-name="ns3:NiceViewService"/>
+            </connection>
+            <connection>
+                <consumer endpoint-name="casaPort1" service-name="ns4:TravelGoodCAService1"/>
+                <provider endpoint-name="TravelGoodClientPortTypeRole_myRole" service-name="ns1:client"/>
+            </connection>
+        </connections>
+    </service-assembly>
+</jbi>
